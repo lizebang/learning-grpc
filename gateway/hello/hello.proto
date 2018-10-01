@@ -1,0 +1,48 @@
+
+syntax = "proto3";
+package hello;
+
+option go_package = "hello";
+
+import "google/api/annotations.proto";
+
+message HelloRequest {
+  string Data = 1;
+}
+
+message HelloResponse {
+  string Data = 1;
+}
+
+service Hello {
+  rpc Hello (HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/gateway/hello"
+      body: "*"
+    };
+  };
+  rpc HelloTimeout (HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/gateway/hello_timeout"
+      body: "*"
+    };
+  };
+  rpc HelloRequestStream (stream HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/gateway/hello_request_stream"
+      body: "*"
+    };
+  };
+  rpc HelloResponseStream (HelloRequest) returns (stream HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/gateway/hello_response_stream"
+      body: "*"
+    };
+  };
+  rpc HelloRequestResponseStream (stream HelloRequest) returns (stream HelloResponse) {
+    option (google.api.http) = {
+      post: "/v1/gateway/hello_request_response_stream"
+      body: "*"
+    };
+  };
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package hello;
+
+option go_package = "hello";
+
+message HelloRequest {
+  string Data = 1;
+}
+
+message HelloResponse {
+  string Data = 1;
+}
+
+service Hello {
+  rpc Hello (HelloRequest) returns (HelloResponse) {};
+  rpc HelloTimeout (HelloRequest) returns (HelloResponse) {};
+  rpc HelloRequestStream (stream HelloRequest) returns (HelloResponse) {};
+  rpc HelloResponseStream (HelloRequest) returns (stream HelloResponse) {};
+  rpc HelloRequestResponseStream (stream HelloRequest) returns (stream HelloResponse) {};
+}
